@@ -22,7 +22,17 @@ export const useHudColor = (): GlassmorphismColors => {
     const isHalloween = useSelector((state: RootState) => state.features.Halloween);
     const halloweenMoon = useSelector((state: RootState) => state.hud.halloween.moon);
 
-    const daltonism = [HudTheme.Trichromatisme, HudTheme.Deuteranopie].includes(currentTheme);
+    // 🔑 Résolution de Auto -> Light/Dark selon préférence OS (fallback Light)
+    const effectiveTheme: Exclude<HudTheme, HudTheme.Auto> = useMemo(() => {
+        if (currentTheme !== HudTheme.Auto) return currentTheme;
+        const prefersDark = typeof window !== 'undefined'
+            && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+        return (prefersDark ? HudTheme.Dark : HudTheme.Light);
+    }, [currentTheme]);
+
+    const daltonism = [HudTheme.Trichromatisme, HudTheme.Deuteranopie].includes(effectiveTheme);
+
+    const DEFAULT_GM = { background: '#00000073', border: '#FFFFFF' };
 
     const _glassmorphismColors: Record<
         Exclude<HudTheme, HudTheme.Auto>,
@@ -31,7 +41,6 @@ export const useHudColor = (): GlassmorphismColors => {
         if (isHalloween) {
             const background = '#00000073';
             const border = '#F0882D';
-
             return {
                 [HudTheme.Light]: { background, border },
                 [HudTheme.Dark]: { background, border },
@@ -44,34 +53,13 @@ export const useHudColor = (): GlassmorphismColors => {
         }
 
         return {
-            [HudTheme.Light]: {
-                background: '#F3FBFA4D',
-                border: '#FFFFFF',
-            },
-            [HudTheme.Dark]: {
-                background: '#22232A73',
-                border: '#FFFFFF',
-            },
-            [HudTheme.Green]: {
-                background: '#3F7B344D',
-                border: '#00E949',
-            },
-            [HudTheme.Uwu]: {
-                background: '#E3A7EC4D',
-                border: '#E3A7EC',
-            },
-            [HudTheme.Deuteranopie]: {
-                background: '#00000073',
-                border: '#FFFFFF',
-            },
-            [HudTheme.Trichromatisme]: {
-                background: '#00000073',
-                border: '#FFFFFF',
-            },
-            [HudTheme.HalloweenVein]: {
-                background: '#00000073',
-                border: '#F02B2B',
-            },
+            [HudTheme.Light]: { background: '#F3FBFA4D', border: '#FFFFFF' },
+            [HudTheme.Dark]: { background: '#22232A73', border: '#FFFFFF' },
+            [HudTheme.Green]: { background: '#3F7B344D', border: '#00E949' },
+            [HudTheme.Uwu]: { background: '#E3A7EC4D', border: '#E3A7EC' },
+            [HudTheme.Deuteranopie]: { background: '#00000073', border: '#FFFFFF' },
+            [HudTheme.Trichromatisme]: { background: '#00000073', border: '#FFFFFF' },
+            [HudTheme.HalloweenVein]: { background: '#00000073', border: '#F02B2B' },
         };
     }, [isHalloween, halloweenMoon]);
 
@@ -90,76 +78,13 @@ export const useHudColor = (): GlassmorphismColors => {
 
     const _buttons = useMemo(
         () => ({
-            [HudTheme.Light]: {
-                primary: {
-                    background: '#22232A',
-                    color: '#F3FBFA',
-                },
-                secondary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-            },
-            [HudTheme.Dark]: {
-                primary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-                secondary: {
-                    background: '#454754',
-                    color: '#F3FBFA',
-                },
-            },
-            [HudTheme.Green]: {
-                primary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-                secondary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-            },
-            [HudTheme.Uwu]: {
-                primary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-                secondary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-            },
-            [HudTheme.Deuteranopie]: {
-                primary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-                secondary: {
-                    background: '#22232A',
-                    color: '#F3FBFA',
-                },
-            },
-            [HudTheme.Trichromatisme]: {
-                primary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-                secondary: {
-                    background: '#22232A',
-                    color: '#F3FBFA',
-                },
-            },
-            [HudTheme.HalloweenVein]: {
-                primary: {
-                    background: '#F3FBFA',
-                    color: '#22232A',
-                },
-                secondary: {
-                    background: '#22232A',
-                    color: '#F3FBFA',
-                },
-            },
+            [HudTheme.Light]: { primary: { background: '#22232A', color: '#F3FBFA' }, secondary: { background: '#F3FBFA', color: '#22232A' } },
+            [HudTheme.Dark]: { primary: { background: '#F3FBFA', color: '#22232A' }, secondary: { background: '#454754', color: '#F3FBFA' } },
+            [HudTheme.Green]: { primary: { background: '#F3FBFA', color: '#22232A' }, secondary: { background: '#F3FBFA', color: '#22232A' } },
+            [HudTheme.Uwu]: { primary: { background: '#F3FBFA', color: '#22232A' }, secondary: { background: '#F3FBFA', color: '#22232A' } },
+            [HudTheme.Deuteranopie]: { primary: { background: '#F3FBFA', color: '#22232A' }, secondary: { background: '#22232A', color: '#F3FBFA' } },
+            [HudTheme.Trichromatisme]: { primary: { background: '#F3FBFA', color: '#22232A' }, secondary: { background: '#22232A', color: '#F3FBFA' } },
+            [HudTheme.HalloweenVein]: { primary: { background: '#F3FBFA', color: '#22232A' }, secondary: { background: '#22232A', color: '#F3FBFA' } },
         }),
         []
     );
@@ -178,66 +103,35 @@ export const useHudColor = (): GlassmorphismColors => {
     );
 
     const _gaugeColors = useMemo(() => {
-        if (currentTheme === HudTheme.Deuteranopie) {
-            return {
-                green_light: '#FFFFFF',
-                green_dark: '#000000',
-                blue_light: '#B314E8',
-                blue_dark: '#000000',
-                red_light: '#00FFFF',
-                red_dark: '#000000',
-                orange_light: '#FFFF00',
-                orange_dark: '#000000',
-            };
+        if (effectiveTheme === HudTheme.Deuteranopie) {
+            return { green_light: '#FFFFFF', green_dark: '#000000', blue_light: '#B314E8', blue_dark: '#000000', red_light: '#00FFFF', red_dark: '#000000', orange_light: '#FFFF00', orange_dark: '#000000' };
         }
-
-        if (currentTheme === HudTheme.Trichromatisme) {
-            return {
-                green_light: '#11B916',
-                green_dark: '#000000',
-                blue_light: '#3E91FF',
-                blue_dark: '#000000',
-                red_light: '#B314E8',
-                red_dark: '#000000',
-                orange_light: '#FFFFFF',
-                orange_dark: '#000000',
-            };
+        if (effectiveTheme === HudTheme.Trichromatisme) {
+            return { green_light: '#11B916', green_dark: '#000000', blue_light: '#3E91FF', blue_dark: '#000000', red_light: '#B314E8', red_dark: '#000000', orange_light: '#FFFFFF', orange_dark: '#000000' };
         }
-
-        return {
-            green_light: '#329121',
-            green_dark: '#283525',
-            blue_light: '#00A5E7',
-            blue_dark: '#263136',
-            red_light: '#92212B',
-            red_dark: '#362628',
-            orange_light: '#FCAF40',
-            orange_dark: '#362F26',
-        };
-    }, [currentTheme]);
+        return { green_light: '#329121', green_dark: '#283525', blue_light: '#00A5E7', blue_dark: '#263136', red_light: '#92212B', red_dark: '#362628', orange_light: '#FCAF40', orange_dark: '#362F26' };
+    }, [effectiveTheme]);
 
     const _imagePrefix = useMemo(() => {
-        if (currentTheme === HudTheme.Deuteranopie) {
-            return 'deuteranopie/';
-        }
-        if (currentTheme === HudTheme.Trichromatisme) {
-            return 'trichromatisme/';
-        }
-
+        if (effectiveTheme === HudTheme.Deuteranopie) return 'deuteranopie/';
+        if (effectiveTheme === HudTheme.Trichromatisme) return 'trichromatisme/';
         return '';
-    }, [currentTheme]);
+    }, [effectiveTheme]);
+
+    // 🔒 Utilise toujours effectiveTheme et prévois un fallback
+    const gm = _glassmorphismColors[effectiveTheme] ?? DEFAULT_GM;
 
     return {
-        glassmorphismColors: _glassmorphismColors[currentTheme],
+        glassmorphismColors: gm,
         gaugeColors: _gaugeColors,
         targetColors: {
-            citizen: daltonism ? '#FFFFFF' : '#FFFFFF',
+            citizen: '#FFFFFF',
             society: daltonism ? '#B314E8' : '#0984E3',
             criminal: daltonism ? '#FFFF00' : '#EF4444',
         },
-        color: _colors[currentTheme],
-        button: _buttons[currentTheme],
-        card: _cards[currentTheme],
+        color: _colors[effectiveTheme],
+        button: _buttons[effectiveTheme],
+        card: _cards[effectiveTheme],
         imagePrefix: _imagePrefix,
         isDaltonism: daltonism,
     };
