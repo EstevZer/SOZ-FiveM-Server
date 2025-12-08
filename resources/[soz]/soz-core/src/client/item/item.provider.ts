@@ -90,6 +90,7 @@ export class ItemProvider {
             ['umbrella']: 'p_amb_brolly_01',
             ['umbrella_white']: 'p_amb_brolly_02',
             ['umbrella_black']: 'p_amb_brolly_03',
+            ['umbrella_Red']: 'p_amb_brolly_04',
         };
 
         this.animationService.toggleAnimation({
