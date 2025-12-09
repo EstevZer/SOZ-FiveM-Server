@@ -23,7 +23,7 @@ export class ItemToolsProvider {
 
     @Once()
     public onStart() {
-        ['umbrella', 'umbrella_white', 'umbrella_black', 'umbrella_red'].forEach(item => {
+        ['umbrella', 'umbrella_white', 'umbrella_black', 'umbrella_red', 'umbrella_pink'].forEach(item => {
             this.item.setItemUseCallback(item, (source, item: Item) => {
                 TriggerClientEvent(ClientEvent.ITEM_UMBRELLA_TOGGLE, source, item.name);
             });
