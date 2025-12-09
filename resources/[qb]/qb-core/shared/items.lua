@@ -3836,8 +3836,8 @@ QBShared.Items = {
         ['description'] = 'Pour rester au sec',
         ['illustrator'] = '.Exaustia'
     },
-    ['umbrella_Red'] = {
-        ['name'] = 'umbrella_Red',
+    ['umbrella_red'] = {
+        ['name'] = 'umbrella_red',
         ['label'] = 'Parapluie rouge',
         ['weight'] = 600,
         ['type'] = 'item',
@@ -3846,6 +3846,18 @@ QBShared.Items = {
         ['shouldClose'] = true,
         ['combinable'] = nil,
         ['description'] = 'Pour rester au sec dans le desert',
+        ['illustrator'] = '.EstevZer'
+    },
+    ['umbrella_pink'] = {
+        ['name'] = 'umbrella_pink',
+        ['label'] = 'Parapluie rose',
+        ['weight'] = 600,
+        ['type'] = 'item',
+        ['unique'] = false,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Pour rester au sec tout en couleur',
         ['illustrator'] = '.EstevZer'
     },
     ["protestsign"] = {
