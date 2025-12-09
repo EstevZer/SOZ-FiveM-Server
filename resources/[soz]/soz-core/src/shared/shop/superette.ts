@@ -32,6 +32,7 @@ const SuperetteContent: ShopContent = [
     { id: 'umbrella_black', type: 'item', price: 10 },
     { id: 'umbrella_red', type: 'item', price: 10 },
     { id: 'umbrella_pink', type: 'item', price: 10 },
+    { id: 'umbrella_blue', type: 'item', price: 10 },
     { id: 'diving_gear', type: 'item', price: 2340 },
     { id: 'zpad', type: 'item', price: 2160 },
     { id: 'instantazouille', type: 'food', price: 9 },

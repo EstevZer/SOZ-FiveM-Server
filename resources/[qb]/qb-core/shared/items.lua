@@ -3860,6 +3860,18 @@ QBShared.Items = {
         ['description'] = 'Pour rester au sec tout en couleur',
         ['illustrator'] = '.EstevZer'
     },
+    ['umbrella_blue'] = {
+        ['name'] = 'umbrella_blue',
+        ['label'] = 'Parapluie bleu',
+        ['weight'] = 600,
+        ['type'] = 'item',
+        ['unique'] = false,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Pour rester au sec sous la pluie',
+        ['illustrator'] = '.EstevZer'
+    },
     ["protestsign"] = {
         ["name"] = "protestsign",
         ["label"] = "Pancarte de manifestation",
